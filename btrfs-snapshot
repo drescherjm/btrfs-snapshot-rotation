@@ -68,9 +68,11 @@ for i in `ls $TARGET|sort |grep @${SNAP}|head -n -${max_snap}`; do
     $cmd >/dev/null
 done
 
+# $time_stamp is the date of snapshots
+time_stamp=`date "+%F_%H-%M"`
 
 # Create new snapshot:
-cmd="btrfs subvolume snapshot $SOURCE $TARGET/`date "+%F--%H-%M-%S-@${SNAP}"`"
+cmd="btrfs subvolume snapshot $SOURCE $TARGET/"${SNAP}-$time_stamp""
 if [ -z $QUIET ]; then
     echo $cmd
 fi
